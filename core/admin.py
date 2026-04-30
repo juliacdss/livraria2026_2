@@ -38,7 +38,7 @@ class EditoraAdmin(ModelAdmin):
 
 @register(Livro)
 class LivroAdmin(ModelAdmin):
-    list_display = ('titulo', 'editora', 'categoria')
+    list_display = ('titulo', 'editora', 'categoria', 'quantidade')
     search_fields = ('titulo', 'editora__nome', 'categoria__descricao')
     list_filter = ('editora', 'categoria')
     ordering = ('titulo', 'editora', 'categoria')
