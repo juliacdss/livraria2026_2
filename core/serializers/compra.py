@@ -1,4 +1,4 @@
-from rest_framework.serializers import CharField, DecimalField, ModelSerializer
+from rest_framework.serializers import CharField, DecimalField, ModelSerializer, SerializerMethodField
 
 from core.models import Compra, ItensCompra
 
@@ -14,9 +14,14 @@ class ItensCompraSerializer(ModelSerializer):
         )
     capa = CharField(source='livro.capa.url', read_only=True)
 
+    total = SerializerMethodField()
+
+    def get_total(self, item):
+        return item.livro.preco * item.quantidade
+
     class Meta:
         model = ItensCompra
-        fields = ('id', 'titulo', 'editora', 'quantidade', 'preco', 'capa')
+        fields = ('id', 'titulo', 'editora', 'quantidade', 'preco', 'total', 'capa')
         depth = 1
 
 
